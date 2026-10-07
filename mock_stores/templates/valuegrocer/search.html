@@ -1,0 +1,14 @@
+{% extends "valuegrocer/base.html" %}
+{% block body %}<main>
+ <h2>{% if is_home %}THIS WEEK'S HOT BUYS{% else %}Results for “{{ q }}” – {{ products|length }} found{% endif %}</h2>
+ {% if products %}<table><thead><tr><th>Product</th><th>Size</th><th>Price</th><th>Availability</th></tr></thead><tbody>
+ {% for p in products %}
+  <tr class="product-card" data-product-id="{{ p.id }}">
+   <td><a class="product-link" href="/stores/{{ store.slug }}/product/{{ p.id }}" data-field="name">{{ p.brand }} {{ p.name }}</a></td>
+   <td data-field="size">{{ p.size }}</td>
+   <td class="price" data-field="price" data-price="{{ '%.2f'|format(p.price) }}">{{ 'S$%.2f'|format(p.price) }}</td>
+   <td class="stock" data-field="stock" data-in-stock="{{ 'true' if p.in_stock else 'false' }}">{{ 'IN STOCK' if p.in_stock else 'SOLD OUT' }}</td>
+  </tr>
+ {% endfor %}</tbody></table>
+ {% else %}<div class="no-results">SORRY – NOTHING FOUND FOR “{{ q }}”.<br>Check your spelling or try a shorter word.</div>{% endif %}
+</main>{% endblock %}

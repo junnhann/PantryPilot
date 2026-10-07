@@ -1,0 +1,15 @@
+{% extends "quickbasket/base.html" %}
+{% block body %}<main>
+ <h3>{% if is_home %}Popular right now{% else %}{{ products|length }} results for “{{ q }}”{% endif %}</h3>
+ {% if products %}<ul class="list">
+ {% for p in products %}
+  <li class="product-card" data-product-id="{{ p.id }}">
+   <div class="pic">{{ p.emoji }}</div>
+   <div><a class="product-link" href="/stores/{{ store.slug }}/product/{{ p.id }}" data-field="name">{{ p.brand }} {{ p.name }}</a>
+    <div class="size" data-field="size">{{ p.size }}</div></div>
+   <div><div class="price" data-field="price" data-price="{{ '%.2f'|format(p.price) }}">{{ 'S$%.2f'|format(p.price) }}</div>
+    <div class="stock" data-field="stock" data-in-stock="{{ 'true' if p.in_stock else 'false' }}">{{ 'In stock' if p.in_stock else 'Unavailable' }}</div></div>
+  </li>
+ {% endfor %}</ul>
+ {% else %}<div class="no-results"><h3>We couldn't find “{{ q }}”</h3><p class="size">Try another search.</p></div>{% endif %}
+</main>{% endblock %}

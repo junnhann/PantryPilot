@@ -1,0 +1,5 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Mock stores</title>
+<style>body{font-family:system-ui;max-width:560px;margin:2rem auto;padding:0 1rem}li{margin:.6rem 0}</style></head>
+<body><h1>CartPilot mock stores</h1><p>Fake grocery sites used for the demo.</p><ul>
+{% for s in stores %}<li><a href="/stores/{{ s.slug }}/">{{ s.name }}</a> – {{ s.tagline }}</li>{% endfor %}
+</ul></body></html>

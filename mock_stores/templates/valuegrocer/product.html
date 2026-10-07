@@ -1,0 +1,16 @@
+{% extends "valuegrocer/base.html" %}
+{% block css %}.box{background:#fff;border:3px solid #c8102e;padding:20px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.burst{background:#c8102e;color:#ffe14d;border-radius:50%;width:150px;height:150px;display:flex;align-items:center;justify-content:center;font-family:Impact,sans-serif;font-size:34px;transform:rotate(-8deg)}
+button.add-to-cart{background:#c8102e;color:#fff;font-weight:bold;border:0;padding:14px 26px;text-transform:uppercase;font-size:15px;cursor:pointer}{% endblock %}
+{% block title %}{{ p.brand }} {{ p.name }} – {{ store.name }}{% endblock %}
+{% block body %}<main data-product-id="{{ p.id }}">
+ <p><a href="/stores/{{ store.slug }}/">« Back to deals</a></p>
+ <div class="box"><div class="burst" data-field="price" data-price="{{ '%.2f'|format(p.price) }}">{{ 'S$%.2f'|format(p.price) }}</div>
+ <div style="flex:1;min-width:240px">
+  <div>Brand: <b data-field="brand">{{ p.brand }}</b></div>
+  <h1 data-field="name">{{ p.brand }} {{ p.name }}</h1>
+  <p>Size: <b data-field="size">{{ p.size }}</b></p>
+  <p class="stock" data-field="stock" data-in-stock="{{ 'true' if p.in_stock else 'false' }}">{{ 'IN STOCK' if p.in_stock else 'SOLD OUT' }}</p>
+  <p data-field="description">{{ p.description }}</p>
+  <button type="button" class="add-to-cart" title="Demo only: does nothing">Add to cart</button>
+ </div></div></main>{% endblock %}

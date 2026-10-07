@@ -1,0 +1,16 @@
+{% extends "quickbasket/base.html" %}
+{% block css %}.card{background:#16264a;border-radius:18px;padding:24px;text-align:center}.card .pic{font-size:96px}
+.card h1{font-size:22px}.card .price{font-size:36px;text-align:center}
+button.add-to-cart{width:100%;margin-top:14px;background:#ff7a1a;color:#0a1226;font-weight:800;border:0;border-radius:14px;padding:16px;font-size:17px;cursor:pointer}{% endblock %}
+{% block title %}{{ p.brand }} {{ p.name }} – {{ store.name }}{% endblock %}
+{% block body %}<main data-product-id="{{ p.id }}">
+ <p><a class="size" href="/stores/{{ store.slug }}/">← Back</a></p>
+ <div class="card"><div class="pic">{{ p.emoji }}</div>
+  <div class="size" data-field="brand">{{ p.brand }}</div>
+  <h1 data-field="name">{{ p.brand }} {{ p.name }}</h1>
+  <div class="size" data-field="size">{{ p.size }}</div>
+  <div class="price" data-field="price" data-price="{{ '%.2f'|format(p.price) }}">{{ 'S$%.2f'|format(p.price) }}</div>
+  <div class="stock" data-field="stock" data-in-stock="{{ 'true' if p.in_stock else 'false' }}">{{ 'In stock' if p.in_stock else 'Unavailable' }}</div>
+  <p class="size" data-field="description">{{ p.description }}</p>
+  <button type="button" class="add-to-cart" title="Demo only: does nothing">Add to basket</button>
+ </div></main>{% endblock %}

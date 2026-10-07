@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CartPilot</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main>
+    <header class="top">
+      <h1>🛒 CartPilot</h1>
+      <span id="mode-badge" class="badge info" hidden></span>
+    </header>
+    <p class="muted tagline">Tell me what you want to cook. I'll check your fridge, then search the shops for you. I never add to cart, log in or buy anything.</p>
+    <p id="error" class="error" role="alert" hidden></p>
+
+    <!-- 1. goal -->
+    <section id="step-goal">
+      <h2>What do you want to make?</h2>
+      <form id="goal-form">
+        <input id="goal" placeholder="e.g. bake a chocolate cake" required>
+        <label>Servings <input id="servings" type="number" min="1" max="50" value="6"></label>
+        <button>Suggest recipes</button>
+      </form>
+    </section>
+
+    <!-- 2. recipe options -->
+    <section id="step-recipes" hidden>
+      <h2>Pick a recipe</h2>
+      <div id="recipe-list"></div>
+    </section>
+
+    <!-- 3. ingredients + fridge photo -->
+    <section id="step-ingredients" hidden>
+      <h2 id="ing-title">Ingredients</h2>
+      <ul id="ing-list"></ul>
+      <h3>Check your fridge</h3>
+      <p class="muted">Upload or take a photo of your fridge/pantry. We only look for the ingredients above.</p>
+      <input id="photo" type="file" accept="image/*">
+      <img id="preview" alt="Your photo" hidden>
+      <p><button id="scan-btn" disabled>Scan photo</button>
+         <button id="skip-btn" class="secondary">Skip – I'll tick things myself</button></p>
+      <p id="scan-status" class="muted" hidden></p>
+    </section>
+
+    <!-- 4. checklist + approval -->
+    <section id="step-checklist" hidden>
+      <h2>Review your list</h2>
+      <p id="owned-note" class="muted" hidden></p>
+      <p class="muted">Tick what you already have. Items marked <span class="badge warn">Please check</span> weren't a sure thing.</p>
+      <h3>✅ You have (<span id="have-count">0</span>)</h3>
+      <ul id="have-list" class="checklist"></ul>
+      <h3>🛒 Need to buy (<span id="need-count">0</span>)</h3>
+      <ul id="need-list" class="checklist"></ul>
+      <button id="approve-btn">Approve &amp; start searching</button>
+    </section>
+
+    <!-- 5. live search -->
+    <section id="step-live" hidden>
+      <div class="live-head">
+        <h2>Live search</h2>
+        <button id="stop-btn" class="danger">⏹ Stop</button>
+      </div>
+      <p id="live-status" class="muted">Starting…</p>
+      <div class="progress"><div id="progress-bar"></div></div>
+      <div id="store-cards" class="store-cards"></div>
+      <div id="grid" class="grid-live" aria-label="Live browser views"></div>
+      <h3>Activity log</h3>
+      <div id="log" class="log" aria-live="polite"></div>
+    </section>
+
+    <!-- 6. results -->
+    <section id="step-results" hidden>
+      <h2>Your shopping list</h2>
+      <p class="muted">Best pick for each ingredient, cheapest way to cover what you need. Nothing has been added to any cart.</p>
+      <div id="result-items"></div>
+      <h3>Total per store</h3>
+      <p class="muted">If you bought your whole list from one store (using that store's best picks).</p>
+      <div id="store-totals"></div>
+      <div class="basket">
+        <div>Your list total: <strong id="basket-total">S$0.00</strong> <span id="basket-note" class="muted"></span></div>
+        <button id="open-all" disabled>Open all product pages</button>
+        <p id="open-all-note" class="muted"></p>
+        <ul id="open-links" class="links"></ul>
+      </div>
+    </section>
+
+    <!-- 7. leftovers -->
+    <section id="step-leftovers" hidden>
+      <h2>🍽️ Leftovers</h2>
+      <p class="muted">You'll have more than you need of these. Here are some ideas to use them up.</p>
+      <ul id="leftover-list" class="leftovers"></ul>
+      <div id="ideas"></div>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

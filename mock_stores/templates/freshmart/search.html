@@ -1,0 +1,17 @@
+{% extends "freshmart/base.html" %}
+{% block body %}
+{% if is_home %}<div class="hero">🌿 {{ store.tagline }}<small>Search above, or browse today's picks.</small></div>{% endif %}
+<main>
+ <h2>{% if is_home %}Today's picks{% else %}Results for “{{ q }}” <small class="size">({{ products|length }} items)</small>{% endif %}</h2>
+ {% if products %}<div class="grid">
+ {% for p in products %}
+  <article class="product-card" data-product-id="{{ p.id }}">
+   <div class="pic">{{ p.emoji }}</div>
+   <a class="product-link" href="/stores/{{ store.slug }}/product/{{ p.id }}" data-field="name">{{ p.brand }} {{ p.name }}</a>
+   <div class="size" data-field="size">{{ p.size }}</div>
+   <div class="price" data-field="price" data-price="{{ '%.2f'|format(p.price) }}">{{ 'S$%.2f'|format(p.price) }}</div>
+   <div class="stock" data-field="stock" data-in-stock="{{ 'true' if p.in_stock else 'false' }}">{{ 'In stock' if p.in_stock else 'Out of stock' }}</div>
+  </article>
+ {% endfor %}</div>
+ {% else %}<div class="no-results"><h3>No results for “{{ q }}”</h3><p>Try a simpler word, e.g. “flour” instead of “wholemeal flour”.</p></div>{% endif %}
+</main>{% endblock %}

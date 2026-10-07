@@ -1,0 +1,19 @@
+{% extends "freshmart/base.html" %}
+{% block css %}.detail{display:grid;grid-template-columns:260px 1fr;gap:32px;background:#fff;border:1px solid #d7e6dd;border-radius:16px;padding:28px}
+.detail .pic{font-size:130px;text-align:center;background:var(--gl);border-radius:14px;padding:20px}
+.detail h1{margin:.2em 0}.detail .price{font-size:34px}button.add-to-cart{margin-top:14px;background:var(--g);color:#fff;border:0;border-radius:28px;padding:13px 30px;font-size:16px;cursor:pointer}
+@media(max-width:700px){.detail{grid-template-columns:1fr}}{% endblock %}
+{% block title %}{{ p.brand }} {{ p.name }} – {{ store.name }}{% endblock %}
+{% block body %}
+<main data-product-id="{{ p.id }}">
+ <p class="size"><a href="/stores/{{ store.slug }}/">Home</a> › {{ p.category|capitalize }}</p>
+ <div class="detail"><div class="pic">{{ p.emoji }}</div><div>
+  <div class="size" data-field="brand">{{ p.brand }}</div>
+  <h1 data-field="name">{{ p.brand }} {{ p.name }}</h1>
+  <div class="size">Pack size: <b data-field="size">{{ p.size }}</b></div>
+  <div class="price" data-field="price" data-price="{{ '%.2f'|format(p.price) }}">{{ 'S$%.2f'|format(p.price) }}</div>
+  <div class="stock" data-field="stock" data-in-stock="{{ 'true' if p.in_stock else 'false' }}">{{ 'In stock' if p.in_stock else 'Out of stock' }}</div>
+  <p data-field="description">{{ p.description }}</p>
+  <button type="button" class="add-to-cart" title="Demo only: does nothing">Add to cart</button>
+ </div></div>
+</main>{% endblock %}
